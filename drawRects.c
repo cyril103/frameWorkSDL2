@@ -4,8 +4,8 @@ SDL_Rect rect;
 Buffer *buffer;
 Vector2 mousePosCliked;
 Vector2 mousePos;
-Bool isDrawing;
-Bool isMoving;
+bool isDrawing;
+bool isMoving;
 int indexRectToMove;
 Vector2 diff;
 
@@ -15,15 +15,15 @@ static void calculdiff(int index);
 void drawRect_init(void)
 {
     Graphics_instance();
-    InputManager_Init();
+    InputManager_Instance();
     buffer = Buffer_empty(sizeof(SDL_Rect));
 }
 void drawRect_update(void)
 {
     if (InputManager_MouseButtonPressed(left))
     {
-        isDrawing = True;
-        isMoving = False;
+        isDrawing = true;
+        isMoving = false;
         mousePosCliked = InputManager_MousePos();
         SDL_Point p = {mousePosCliked.x, mousePosCliked.y};
         for (int i = 0; i < Buffer_Nb_elem(buffer); ++i)
@@ -32,8 +32,8 @@ void drawRect_update(void)
             {
                 indexRectToMove = i;
                 calculdiff(i);
-                isDrawing = False;
-                isMoving = True;
+                isDrawing = false;
+                isMoving = true;
 
                 break;
             }
@@ -44,8 +44,8 @@ void drawRect_update(void)
     {
         if (isDrawing)
             Buffer_add(buffer, &rect);
-        isDrawing = False;
-        isMoving = False;
+        isDrawing = false;
+        isMoving = false;
     }
     if (isDrawing)
     {

@@ -33,7 +33,7 @@ void App_init(void)
 
     timer_instance();
 
-    InputManager_Init();
+    InputManager_Instance();
     AssetManager_Init();
 
     tex = Texture_("spriteSheet.png");

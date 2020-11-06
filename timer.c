@@ -1,10 +1,7 @@
 #include"timer.h"
 
-Timer *s_instance = NULL; 
-// unsigned int startTicks;
-// unsigned int elapsedTicks;
-// float deltaTime;
-// float timeScale;
+static Timer *s_instance = NULL; 
+
 
 
 static Timer *Timer_new(void);
