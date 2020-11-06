@@ -9,14 +9,33 @@
 #include <stdio.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "util.h"
+#include "memory.h"
+#include <string.h>
+#include <stdbool.h>
+
+typedef struct Graphics{
+    /*public methods*/
+    void (*clearBackBuffer)(void);
+    void (*render)(void);
+    void (*drawRects)(SDL_Rect *rects ,int n,Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    SDL_Texture* (*loadTexture)(char const * path);
+    void (*drawTexture)(SDL_Texture* tex);
+    /*public attributs*/
+    const int SCREEN_WIDTH;
+    const int SCREEN_HEIGHT;
+    const char* WINDOW_TITLE;
+    /*private attributs*/
+    SDL_Window *m_window;
+    SDL_Renderer *m_renderer;
+}Graphics;
 
 
 
 
-void Graphics_init(void);
+Graphics *Graphics_instance(void);
 void Graphics_release(void);
-Bool Graphics_isInitialized(void);
+
+bool Graphics_isInitialized(void);
 void Graphics_clearBackBuffer(void);
 void Graphics_render(void);
 void Graphics_draw_rects(SDL_Rect *rects ,int n,Uint8 r, Uint8 g, Uint8 b, Uint8 a);
