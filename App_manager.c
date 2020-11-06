@@ -31,7 +31,7 @@ void App_init(void)
         quit = True;
     }
 
-    timer_init();
+    timer_instance();
 
     InputManager_Init();
     AssetManager_Init();
