@@ -24,7 +24,8 @@ void App_realease(void)
 void App_init(void)
 {
 
-    Graphics_init();
+
+    Graphics_instance();
     if (!Graphics_isInitialized())
     {
         quit = True;

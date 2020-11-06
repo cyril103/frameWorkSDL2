@@ -14,7 +14,7 @@ static void calculdiff(int index);
 
 void drawRect_init(void)
 {
-    Graphics_init();
+    Graphics_instance();
     InputManager_Init();
     buffer = Buffer_empty(sizeof(SDL_Rect));
 }

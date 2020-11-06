@@ -19,7 +19,7 @@ void Texture_Destroy(Texture **self){
 }
 
 Texture *Texture_(char const *filename){
-    Graphics_init();
+    Graphics_instance();
     AssetManager_Init();
     Texture *This = memory_Alloc(sizeof(Texture));
     This->super = Entity_0();
