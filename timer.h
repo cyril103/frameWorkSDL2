@@ -2,8 +2,8 @@
 #define _TIMER_H
 
 #include"SDL2/SDL.h"
+#include <string.h>
 #include "memory.h"
-#include "string.h"
 
 typedef struct Timer{
     /*public methods*/

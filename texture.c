@@ -1,6 +1,4 @@
 #include "texture.h"
-#include "memory.h"
-
 
 struct Texture {
     Entity *super;
@@ -53,10 +51,10 @@ void Texture_setScale(Texture *self, Vector2 scale){
 Vector2 Texture_getScale(Texture *self, ENTITY_SPACE space){
     return Entity_getScale(self->super,space);
 }
-void Texture_active(Texture *self, Bool active){
+void Texture_active(Texture *self, bool active){
     Entity_active(self->super,active);
 }
-Bool Texture_isActive(Texture *self){
+bool Texture_isActive(Texture *self){
     return Entity_isActive(self->super);
 }
 void Texture_setParent(Texture *self, Entity *parent){

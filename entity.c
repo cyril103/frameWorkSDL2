@@ -1,13 +1,12 @@
 #include "entity.h"
-#include <stdio.h>
-#include "memory.h"
+
 
 struct Entity{
 
     Vector2 mPos;
     float mRotation;
     Vector2 mScale;
-    Bool mActive;
+    bool mActive;
     Entity *mParent;
 
 
@@ -23,7 +22,7 @@ Entity *Entity_(Vector2 pos){
     Entity *This = memory_Alloc(sizeof (Entity));
     This->mPos = pos;
     This->mRotation = 0.0f;
-    This->mActive = True;
+    This->mActive = true;
     This->mParent = NULL;
     This->mScale = Vector2_(1.f,1.f);
     return This;
@@ -83,10 +82,10 @@ Vector2 Entity_getScale(Entity *self, ENTITY_SPACE space){
     return scale;
 }
 
-void Entity_active(Entity *self, Bool active){
+void Entity_active(Entity *self, bool active){
     self->mActive = active;
 }
-Bool Entity_isActive(Entity *self){
+bool Entity_isActive(Entity *self){
     return self->mActive;
 }
 void Entity_setParent(Entity *self, Entity *parent){

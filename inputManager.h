@@ -3,8 +3,8 @@
 
 #include "SDL2/SDL.h"
 #include <stdbool.h>
-#include "memory.h"
 #include <string.h>
+#include "memory.h"
 #include "mathHelper.h"
 
 

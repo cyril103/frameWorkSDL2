@@ -4,9 +4,9 @@
 
 #include "Graphics.h"
 #include "timer.h"
-
 #include "inputManager.h"
 #include "texture.h"
+
 typedef struct AppManager {
     /*public methods*/
     void (*run)(void);

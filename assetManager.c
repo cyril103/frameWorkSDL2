@@ -1,9 +1,7 @@
 #include "assetManager.h"
-#include <string.h>
-#include "memory.h"
 
-/* static Bool initialized = False;
-static HashTable *textures; */
+
+
 static AssetManager *s_instance = NULL;
 static AssetManager *AssetManager_new(void);
 
@@ -52,13 +50,13 @@ SDL_Texture *AssetManager_GetTexture(char const *filename){
     strcat(path,filename);
     SDL_free(home);
     home = NULL;
-    Bool toFree = True;
+    bool toFree = true;
 
     void *tex = NULL;
     hashtable_get(s_instance->mTextures,path,&tex);
     if(tex == NULL){
         hashtable_add(s_instance->mTextures,path,Graphics_loadTexture(path));
-        toFree = False;
+        toFree = false;
     }
     
     hashtable_get(s_instance->mTextures,path,&tex);

@@ -1,6 +1,4 @@
 #include "App_manager.h"
-#include "string.h"
-
 
 
 static AppManager *s_instance = NULL;

@@ -5,11 +5,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "memory.h"
-#include <string.h>
-#include <stdbool.h>
 
 typedef struct Graphics{
     /*public methods*/
