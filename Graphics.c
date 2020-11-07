@@ -67,9 +67,9 @@ static bool init(void){
 			return false;
 		}
 
-    s_instance->m_window =  SDL_CreateWindow(GRAPHICS_TITLE,
+    s_instance->m_window =  SDL_CreateWindow(WINDOW_TITLE,
      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-       GRAPHICS_WIDTH, GRAPHICS_HEIGHT, SDL_WINDOW_SHOWN);
+       SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     
     if(s_instance->m_window == NULL){
         printf("Window Creation Error: %s\n", SDL_GetError());

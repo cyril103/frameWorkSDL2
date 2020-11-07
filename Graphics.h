@@ -1,8 +1,6 @@
 #ifndef __GRAPHICS_H__
 #define __GRAPHICS_H__
-#define GRAPHICS_WIDTH 1024
-#define GRAPHICS_HEIGHT 576
-#define GRAPHICS_TITLE "testsdl"
+
 
 
 #include <stdlib.h>

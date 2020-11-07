@@ -43,8 +43,7 @@ static AppManager *AppManager_new(void){
     s_instance->mTimer = timer_instance();
 
     s_instance->mInputMgr = InputManager_Instance();
-    s_instance->mAssetMgr =
-     AssetManager_Instance();
+    s_instance->mAssetMgr = AssetManager_Instance();
 
     tex = Texture_("spriteSheet.png");
 
