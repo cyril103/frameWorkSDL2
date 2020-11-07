@@ -20,7 +20,7 @@ void Texture_Destroy(Texture **self){
 
 Texture *Texture_(char const *filename){
     Graphics_instance();
-    AssetManager_Init();
+    AssetManager_Instance();
     Texture *This = memory_Alloc(sizeof(Texture));
     This->super = Entity_0();
     This->mtex = AssetManager_GetTexture(filename);
