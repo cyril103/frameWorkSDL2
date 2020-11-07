@@ -4,10 +4,13 @@
 #include "mathHelper.h"
 #include "memory.h"
 
-
 typedef struct Entity Entity;
 
-typedef enum ENTITY_SPACE {LOCAL ,WORLD} ENTITY_SPACE;
+typedef enum ENTITY_SPACE
+{
+    LOCAL,
+    WORLD
+} ENTITY_SPACE;
 
 Entity *Entity_0(void);
 Entity *Entity_(Vector2 pos);
@@ -25,10 +28,5 @@ void Entity_setParent(Entity *self, Entity *parent);
 Entity *Entity_getParent(Entity *self);
 void Entity_translate(Entity *self, Vector2 vec, ENTITY_SPACE space);
 void Entity_rotate(Entity *self, float amount);
-
-
-
-
-
 
 #endif

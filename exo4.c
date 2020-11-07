@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
     (void)argc;
     (void)argv;
-    AppManager *app =  App_instance();
+    AppManager *app = App_instance();
     app->run();
     App_realease();
     memory_leak_check();

@@ -25,5 +25,4 @@ void Texture_rotate(Texture *self, float amount);
 
 
 
-
 #endif

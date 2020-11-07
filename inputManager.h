@@ -7,13 +7,18 @@
 #include "memory.h"
 #include "mathHelper.h"
 
+typedef enum INPUT_MANAGER_MOUSE_BUTTON
+{
+    left = 0,
+    right,
+    middle,
+    back,
+    forward
+} INPUT_MANAGER_MOUSE_BUTTON;
 
-
-typedef enum INPUT_MANAGER_MOUSE_BUTTON { left = 0,
- right, middle, back, forward }INPUT_MANAGER_MOUSE_BUTTON;
-
- typedef struct InputManager{
-     /*public methods*/
+typedef struct InputManager
+{
+    /*public methods*/
     bool (*KeyDown)(SDL_Scancode scanCode);
     bool (*KeyPressed)(SDL_Scancode scanCode);
     bool (*KeyReleased)(SDL_Scancode scanCode);
@@ -32,7 +37,7 @@ typedef enum INPUT_MANAGER_MOUSE_BUTTON { left = 0,
     int mMouseXPos;
     int mMouseYPos;
 
- }InputManager;
+} InputManager;
 
 InputManager *InputManager_Instance(void);
 void InputManager_Release(void);

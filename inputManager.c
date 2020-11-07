@@ -1,11 +1,10 @@
 #include "inputManager.h"
 
-
-
 static InputManager *s_instance = NULL;
 static InputManager *InputManager_new(void);
 
-static InputManager *InputManager_new(void){
+static InputManager *InputManager_new(void)
+{
 	InputManager model = {
 		.KeyDown = InputManager_KeyDown,
 		.KeyPressed = InputManager_KeyPressed,
@@ -16,31 +15,28 @@ static InputManager *InputManager_new(void){
 		.MousePos = InputManager_MousePos,
 		.Update = InputManager_Update,
 		.UpdatePrevInput = InputManager_UpdatePrevInput,
-		
 
 	};
 	s_instance = memory_Alloc(sizeof(InputManager));
-	memcpy(s_instance,&model,sizeof(InputManager));
+	memcpy(s_instance, &model, sizeof(InputManager));
 	s_instance->mKeyboardState = SDL_GetKeyboardState(&(s_instance->mKeyLength));
 	s_instance->mPrevKeyboardState = memory_Alloc(s_instance->mKeyLength * sizeof(Uint8));
-	memcpy(s_instance->mPrevKeyboardState,s_instance->mKeyboardState,s_instance->mKeyLength);
+	memcpy(s_instance->mPrevKeyboardState, s_instance->mKeyboardState, s_instance->mKeyLength);
 	return s_instance;
 }
 
 InputManager *InputManager_Instance(void)
 {
-	
+
 	if (s_instance == NULL)
 		s_instance = InputManager_new();
 	return s_instance;
-
-	
 }
 void InputManager_Release(void)
 {
-	memory_Free(s_instance->mPrevKeyboardState,s_instance->mKeyLength * sizeof(Uint8));
+	memory_Free(s_instance->mPrevKeyboardState, s_instance->mKeyLength * sizeof(Uint8));
 	s_instance->mPrevKeyboardState = NULL;
-	memory_Free(s_instance,sizeof(InputManager));
+	memory_Free(s_instance, sizeof(InputManager));
 	s_instance = NULL;
 }
 bool InputManager_KeyDown(SDL_Scancode scanCode)
@@ -165,8 +161,7 @@ bool InputManager_MouseButtonReleased(INPUT_MANAGER_MOUSE_BUTTON button)
 
 Vector2 InputManager_MousePos(void)
 {
-	return Vector2_((float)s_instance->mMouseXPos,(float)s_instance->mMouseYPos);
-
+	return Vector2_((float)s_instance->mMouseXPos, (float)s_instance->mMouseYPos);
 }
 
 void InputManager_Update(void)
@@ -177,6 +172,6 @@ void InputManager_Update(void)
 void InputManager_UpdatePrevInput(void)
 {
 
-	memcpy(s_instance->mPrevKeyboardState,s_instance->mKeyboardState,s_instance->mKeyLength);
+	memcpy(s_instance->mPrevKeyboardState, s_instance->mKeyboardState, s_instance->mKeyLength);
 	s_instance->mPrevMouseState = s_instance->mMouseState;
 }
