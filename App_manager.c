@@ -1,11 +1,9 @@
 #include "App_manager.h"
-#include "string.h"
 
 
-#define FRAME_RATE 60
-Bool quit = False;
-SDL_Event events;
+static AppManager *s_instance = NULL;
 
+static AppManager *AppManager_new(void);
 static void earlyUpdate(void);
 static void update(void);
 static void lateUpdate(void);
@@ -19,29 +17,47 @@ void App_realease(void)
     InputManager_Release();
     timer_release();
     Graphics_release();
+
+    memory_Free(s_instance,sizeof(AppManager));
        
 }
-void App_init(void)
-{
 
-    Graphics_init();
+static AppManager *AppManager_new(void){
+    
+    AppManager model = {
+        .run = App_run,
+        .FRAME_RATE = 60,
+        .mQuit = false,
+        
+    };
+    s_instance = memory_Alloc(sizeof(AppManager));
+    memcpy(s_instance,&model,sizeof(AppManager));
+    s_instance->mGraphics = Graphics_instance();
     if (!Graphics_isInitialized())
     {
-        quit = True;
+        s_instance->mQuit = true;
     }
 
-    timer_init();
+    s_instance->mTimer = timer_instance();
 
-    InputManager_Init();
-    AssetManager_Init();
+    s_instance->mInputMgr = InputManager_Instance();
+    s_instance->mAssetMgr = AssetManager_Instance();
 
     tex = Texture_("spriteSheet.png");
-    Texture *tex2 = Texture_("spriteSheet.png");
-    Texture *tex3 = Texture_("spriteSheet.png");
 
-    Texture_Destroy(&tex2);
-    Texture_Destroy(&tex3);
-        
+
+
+    return s_instance;
+}
+
+
+
+AppManager *App_instance(void)
+{   
+    if(s_instance == NULL)
+        s_instance = AppManager_new();
+    
+    return s_instance;       
 
     
 }
@@ -56,7 +72,7 @@ static void update(void)
 {
     
     if(InputManager_KeyPressed(SDL_SCANCODE_ESCAPE))
-        quit = True;
+        s_instance->mQuit = true;
 }
 
 static void lateUpdate(void)
@@ -76,22 +92,22 @@ static void render(void)
 void App_run(void)
 {
 
-    while (!quit)
+    while (!(s_instance->mQuit))
     {
 
         timer_update();
 
-        while (SDL_PollEvent(&events))
+        while (SDL_PollEvent(&(s_instance->mEvents)))
         {
-            if (events.type == SDL_QUIT)
+            if (s_instance->mEvents.type == SDL_QUIT)
             {
-                quit = True;
+                s_instance->mQuit = true;
             }
 
             
         }
 
-        if (timer_deltaTime() >= (1.0f / FRAME_RATE))
+        if (timer_deltaTime() >= (1.0f / s_instance->FRAME_RATE))
         {
 
             earlyUpdate();

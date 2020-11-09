@@ -1,23 +1,32 @@
 #include "assetManager.h"
-#include <string.h>
-#include "memory.h"
-
-static Bool initialized = False;
-static HashTable *textures;
-
-void AssetManager_Init(void){
-    if(initialized)
-        return;
-    hashtable_new(&textures);
 
 
 
-    initialized = True;    
+static AssetManager *s_instance = NULL;
+static AssetManager *AssetManager_new(void);
+
+static AssetManager *AssetManager_new(void){
+    AssetManager model = {
+        .GetTexture = AssetManager_GetTexture,
+    };
+    s_instance = memory_Alloc(sizeof(AssetManager));
+    memcpy(s_instance,&model,sizeof(AssetManager));
+    hashtable_new(&s_instance->mTextures);
+    return s_instance;
+
+}
+
+AssetManager *AssetManager_Instance(void){
+    if(s_instance == NULL)
+        s_instance = AssetManager_new();
+    
+    return s_instance; 
 
 }
 void AssetManager_Released(void){
+    //freeing loadTextures
     HashTableIter iterTex;
-    hashtable_iter_init(&iterTex,textures);
+    hashtable_iter_init(&iterTex,s_instance->mTextures);
     TableEntry *texEntry;
     while (hashtable_iter_next(&iterTex,&texEntry) != CC_ITER_END)
     {
@@ -26,8 +35,11 @@ void AssetManager_Released(void){
        SDL_DestroyTexture(texEntry->value);
        texEntry->value = NULL;    
     }
-    hashtable_destroy(textures);
-    textures = NULL;
+    hashtable_destroy(s_instance->mTextures);
+    s_instance->mTextures = NULL;
+    /**************************************/
+
+    memory_Free(s_instance,sizeof(AssetManager));
 
 }
 SDL_Texture *AssetManager_GetTexture(char const *filename){
@@ -38,16 +50,16 @@ SDL_Texture *AssetManager_GetTexture(char const *filename){
     strcat(path,filename);
     SDL_free(home);
     home = NULL;
-    Bool toFree = True;
+    bool toFree = true;
 
     void *tex = NULL;
-    hashtable_get(textures,path,&tex);
+    hashtable_get(s_instance->mTextures,path,&tex);
     if(tex == NULL){
-        hashtable_add(textures,path,Graphics_loadTexture(path));
-        toFree = False;
+        hashtable_add(s_instance->mTextures,path,Graphics_loadTexture(path));
+        toFree = false;
     }
     
-    hashtable_get(textures,path,&tex);
+    hashtable_get(s_instance->mTextures,path,&tex);
     if(toFree){
         memory_Free(path,512);
         path = NULL;

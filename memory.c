@@ -8,8 +8,6 @@ void *memory_Alloc(int byte)
     return malloc((size_t)byte);
 }
 
-
-
 void memory_Free(void *ptr, int byte)
 {
     TotalAllocation -= byte;

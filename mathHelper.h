@@ -27,6 +27,4 @@ Vector2 Vector2_Times_f(Vector2 const r, float const l);
 Vector2 Vector2_Lerp(Vector2 const start, Vector2 const end, float const time);
 Vector2 Vector2_Rotate(Vector2 const vec, float const angle);
 
-
-
 #endif

@@ -65,7 +65,6 @@ inline Vector2 Vector2_Lerp(Vector2 const start, Vector2 const end, float const 
         return end;
 
     Vector2 diff = Vector2_Minus(end, start);
-    
 
     return Vector2_Plus(start, Vector2_Times_f(Vector2_Normalized(diff), Vector2_Magnitude(diff) * time));
 }
